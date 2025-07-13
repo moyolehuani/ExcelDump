@@ -30,3 +30,18 @@ Sub RemoveConnections()
         Next conn
     End With
 End Sub
+Sub EliminarConexiones()
+    Dim conexion As Object
+    
+    ' Eliminar todas las conexiones de libro externo
+    For Each conexion In ThisWorkbook.Connections
+        conexion.Delete
+    Next conexion
+    
+    ' Eliminar todas las conexiones de datos en las hojas
+    For Each hoja In ThisWorkbook.Sheets
+        For Each conexion In hoja.QueryTables
+            conexion.Delete
+        Next conexion
+    Next hoja
+End Sub
