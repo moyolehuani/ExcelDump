@@ -1,0 +1,186 @@
+Sub InicializarHojaAgotados()
+    Dim RutaFuente As String
+
+    RutaFuente = "Y:\1. Poyectos\A. Catalogos\Tablas\Base de productos.xlsm"
+    
+    Dim ListaAgotados As Variant
+    ListaAgotados = Array()
+    j = 0
+    
+    With Workbooks(RutaFuente).Worksheets("Hoja1")
+        For Each clave In .Range("C")
+            If Not IsInArray(clave, ListaAgotados) Then
+                ReDim Preserve ListaAgotados(j)
+                ListaAgotados(j) = clave
+                j = j + 1
+            End If
+        Next clave
+    End With
+    
+    'Workbooks(RutaFuente).Worksheets("Hoja1").Range("C").AdvancedFilter _
+        'Action:=xlFilterCopy, CopyToRange:=.Range()
+    
+    'Range("C").AdvancedFilter _
+    '    Action:=xlFilterCopy, CopyToRange:=Range("E1"), Unique:=True
+    
+End Sub
+
+Sub LlenarHojaAgotados()
+    'define una lista con todos los productos agotados
+    Dim ListaAgotados As Variant
+    ListaAgotados = Array()
+    
+    'lee la columna de productos agotados y va agregando esas claves en la lista de agotados
+    i = 13
+    j = 0
+    Do While Not IsEmpty(Worksheets("AGOTADOS").Cells(i, 4).Value)
+        ReDim Preserve ListaAgotados(j)
+        ListaAgotados(j) = Worksheets("AGOTADOS").Cells(i, 4).Value
+        i = i + 1
+        j = j + 1
+    Loop
+    'reinicializa valores de renglón
+    i = 13
+    'Imprime Categoría
+    'For Each clave In ListaAgotados
+        'Worksheets("AGOTADOS").Cells(i, 3).Value =
+        'Worksheets("AGOTADOS").Cells(i, 3).Value = WorksheetFunction.VLookup(clave, Range("Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO"!A:F), 4, 0)
+     '   i = i + 1
+    'Next clave
+End Sub
+Sub FormatoAgotados()
+    Dim ListaAgotados As Variant
+    ListaAgotados = Array(1)
+    
+    'Ruta del archivo Fuente
+    RutaFuente = "Fuente Hipotetica.xlsx"
+    'Ruta del archivo de bases de datos
+    RutaBD = "ClavesPaquete C10.xlsx"
+    
+    'inicializa índice del array de agotados
+    Dim indice As Integer
+    indice = 0
+    
+    'lee la columna de productos agotados y va agregando esas claves en la lista de agotados
+    'las claves están en la columna C
+    With Workbooks(RutaFuente).Worksheets("Hoja1")
+        Rows("1").Delete
+        For Each clave In Range("C:C")
+            If UBound(Filter(ListaAgotados, clave)) = -1 Then
+                ReDim Preserve ListaAgotados(indice)
+                ListaAgotados(indice) = clave
+                indice = indice + 1
+            End If
+        Next clave
+    End With
+    Sheets.Add.Name = "Productos"
+    Workbooks(RutaFuente).Worksheets("Hoja1").Name = "Reporte de Agotados"
+    
+    'Bandera para confirmar que el arreglo está bien definido:
+    'For i = LBound(ListaAgotados) To UBound(ListaAgotados)
+    '    msg = msg & ListaAgotados(i) & vbNewLine
+    'Next i
+    'MsgBox "Los productos agotados son: " & vbNewLine & msg
+    
+    'Imprime en Nueva Hoja los productos agotados
+    CamposXProducto = Array("Clave", "Imagen", "Descripción", "Categoría", "Canal", "Status", "Origen")
+    'Configura los campos
+    For i = LBound(CamposXProducto) To UBound(CamposXProducto)
+        Workbooks(RutaFuente).Worksheets("Productos").Cells(1, i + 1).Value = CamposXProducto(i)
+    Next i
+    'Pone los productos
+    For i = LBound(ListaAgotados) To UBound(ListaAgotados)
+        Workbooks(RutaFuente).Worksheets("Productos").Cells(i + 2, 1).Value = ListaAgotados(i)
+    Next i
+    
+    'Imágenes
+    
+    'Dirección en el servidor de Amazon
+    Dim ImgPath As String
+    ImgPath = "https://s3.us-east-1.amazonaws.com/mx.com.fuller.assets/cms/images/Producto/"
+    
+    Dim RutasImagenes As Variant
+    RutasImagenes = Array(i)
+    
+    For i = LBound(ListaAgotados) To UBound(ListaAgotados)
+        ReDim Preserve RutasImagenes(i)
+        RutasImagenes(i) = ImgPath & ListaAgotados(i) & ".png"
+    Next i
+    
+    'Pone las imágenes en las celdas
+    'For i = LBound(RutasImagenes) To UBound(RutasImagenes)
+    '    Workbooks(RutaFuente).Worksheets("Productos").Cells(i + 2, 2).Value = "=IMAGE('" & RutaFuente(i) & "',"""",0)"
+        '"=IMAGE(""" & RutaFuente(i) & ""","""",0)"
+    'Next i
+    
+    'Pone la descripción del producto
+    Dim ProductDescriptions As Variant
+    ProductDescriptions = Array()
+    
+    With Workbooks(RutaBD).Worksheets("Hoja1")
+        For i = LBound(ListaAgotados) To UBound(ListaAgotados)
+            Set RangoBD = .Range("G:M")
+            ReDim Preserve ProductDescriptions(i)
+            ProductDescriptions(i) = Application.WorksheetFunction.VLookup(ListaAgotados(i), RangoBD, 3, False)
+        Next i
+    End With
+    
+    'Imprime Descripción de Productos
+    For i = LBound(ProductDescriptions) To UBound(ProductDescriptions)
+        Workbooks(RutaFuente).Worksheets("Productos").Cells(i + 2, 3).Value = ProductDescriptions(i)
+    Next i
+    
+    'Categoría de Productos
+    Dim ProductCategory As Variant
+    ProductCategory = Array()
+    
+    For i = LBound(ListaAgotados) To UBound(ListaAgotados)
+            ReDim Preserve ProductCategory(i)
+            ProductCategory(i) = Application.WorksheetFunction.VLookup(ListaAgotados(i), RangoBD, 4, False)
+    Next i
+    
+    For i = LBound(ProductCategory) To UBound(ProductCategory)
+        Workbooks(RutaFuente).Worksheets("Productos").Cells(i + 2, 4).Value = ProductCategory(i)
+    Next i
+    
+    'Canal de Productos
+    Dim ProductChannel As Variant
+    ProductChannel = Array()
+    
+    For i = LBound(ListaAgotados) To UBound(ListaAgotados)
+            ReDim Preserve ProductChannel(i)
+            ProductChannel(i) = Application.WorksheetFunction.VLookup(ListaAgotados(i), RangoBD, 5, False)
+    Next i
+    
+    For i = LBound(ProductChannel) To UBound(ProductChannel)
+        Workbooks(RutaFuente).Worksheets("Productos").Cells(i + 2, 5).Value = ProductChannel(i)
+    Next i
+    
+    'Status del Producto
+    Dim ProductStatus As Variant
+    ProductStatus = Array()
+    
+    For i = LBound(ListaAgotados) To UBound(ListaAgotados)
+            ReDim Preserve ProductStatus(i)
+            ProductStatus(i) = Application.WorksheetFunction.VLookup(ListaAgotados(i), RangoBD, 6, False)
+    Next i
+    
+    For i = LBound(ProductStatus) To UBound(ProductStatus)
+        Workbooks(RutaFuente).Worksheets("Productos").Cells(i + 2, 6).Value = ProductStatus(i)
+    Next i
+    
+    'Origen del Producto
+    Dim ProductOrigin As Variant
+    ProductOrigin = Array()
+    
+    For i = LBound(ListaAgotados) To UBound(ListaAgotados)
+            ReDim Preserve ProductOrigin(i)
+            ProductOrigin(i) = Application.WorksheetFunction.VLookup(ListaAgotados(i), RangoBD, 7, False)
+    Next i
+    
+    For i = LBound(ProductOrigin) To UBound(ProductOrigin)
+        Workbooks(RutaFuente).Worksheets("Productos").Cells(i + 2, 7).Value = ProductOrigin(i)
+    Next i
+    
+    
+End Sub
