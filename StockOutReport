@@ -184,3 +184,373 @@ Sub FormatoAgotados()
     
     
 End Sub
+Sub VTANETA()
+'
+' VTANETA Macro
+'
+
+'
+    Range("I1").Select
+    Selection.EntireColumn.Insert
+    ActiveCell.FormulaR1C1 = "CY"
+    Range("M1").Select
+    Selection.EntireColumn.Insert
+    ActiveCell.FormulaR1C1 = "VTA_NETA"
+    Columns("M:M").Select
+    Selection.NumberFormat = "$#,##0.00"
+'
+    Dim lastRow As Long
+    Dim row_no As Long
+    
+    'Dim sht As Worksheet
+    
+    'sht = ThisWorkbook.Worksheets("Sheet1")
+    
+    lastRow = Cells(Rows.Count, 1).End(xlUp).Row
+    
+    For row_no = 2 To lastRow
+        ActiveSheet.Cells(row_no, 13).Value = (ActiveSheet.Cells(row_no, 10).Value - ActiveSheet.Cells(row_no, 12).Value)
+    Next
+    
+End Sub
+
+Sub BaseDatos_Agotados_DarFormato()
+'
+' BaseDatos_Agotados_DarFormato Macro
+'
+
+'
+    ActiveCell.FormulaR1C1 = "Descripción"
+    Range("N1").Select
+    ActiveCell.FormulaR1C1 = "Categoría"
+    Range("O1").Select
+    ActiveCell.FormulaR1C1 = "Canal"
+    Range("P1").Select
+    ActiveCell.FormulaR1C1 = "Status"
+    Range("Q1").Select
+    ActiveCell.FormulaR1C1 = "Origen"
+    Range("M2").Select
+End Sub
+Sub DarFormato()
+'
+' DarFormato Macro
+'
+
+'
+    ActiveCell.FormulaR1C1 = ""
+    Range("M1").Select
+    ActiveCell.FormulaR1C1 = "Descripción"
+    Range("N1").Select
+    ActiveCell.FormulaR1C1 = "Categoría"
+    Range("O1").Select
+    ActiveCell.FormulaR1C1 = "Canal"
+    Range("P1").Select
+    With Selection.Interior
+        .Pattern = xlNone
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    ActiveCell.FormulaR1C1 = "Status"
+    Range("Q1").Select
+    With Selection.Interior
+        .Pattern = xlNone
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    ActiveCell.FormulaR1C1 = "Origen"
+    Range("M2").Select
+    ActiveSheet.PasteSpecial Format:="Texto Unicode", Link:=False, _
+        DisplayAsIcon:=False, NoHTMLFormatting:=True
+    ActiveCell.FormulaR1C1 = _
+        "BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+    Range("M2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=VLOOKUP(RC[-6],'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!C[-12]:C[-7],2,0)"
+    Range("N2").Select
+    ActiveSheet.Paste
+    Range("O2").Select
+    ActiveSheet.Paste
+    Range("O2").Select
+    Windows("Fuente Agotados.xlsx").Activate
+    Range("P2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=INDEX('C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C3,MATCH(RC[-9],'C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C4,0))"
+    Range("Q2").Select
+    ActiveSheet.Paste
+    Range("O2").Select
+    ActiveCell.FormulaR1C1 = "=VLOOKUP(RC[-8],[TOs1708.xlsx]TOs!C1:C5,3,0)"
+    Range("O2").Select
+    ActiveCell.FormulaR1C1 = "=VLOOKUP(RC[-8],[TOs1708.xlsx]TOs!C1:C5,3,0)"
+    Range("O9").Select
+End Sub
+Sub DarFormatoBDAgotados()
+'
+' DarFormatoBDAgotados Macro
+'
+
+'
+    Columns("I:M").Select
+    Selection.ClearContents
+    Range("I1").Select
+    ActiveCell.FormulaR1C1 = "Descripción"
+    Range("J1").Select
+    ActiveCell.FormulaR1C1 = "Categoría"
+    Range("K1").Select
+    ActiveCell.FormulaR1C1 = "Canal"
+    Range("L1").Select
+    Selection.NumberFormat = "@"
+    ActiveCell.FormulaR1C1 = "Status"
+    Range("M1").Select
+    Selection.NumberFormat = "@"
+    ActiveCell.FormulaR1C1 = "Origen"
+    Range("I2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+    Range("I2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+    Range("I2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+    Range("I2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+    Range("I3").Select
+    ActiveCell.FormulaR1C1 = _
+        "BUSCARV(G3,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+    Range("I3").Select
+    ActiveCell.FormulaR1C1 = _
+        "=BUSCARV(G3,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+    Range("I4").Select
+    Columns("I:I").ColumnWidth = 53.91
+    Range("I2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+    Range("I2").Select
+    Selection.NumberFormat = "General"
+    ActiveCell.FormulaR1C1 = _
+        "=VLOOKUP(RC[-2],'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!C[-8]:C[-3],2,0)"
+    Range("I2").Select
+    Selection.AutoFill Destination:=Range("I2:I32"), Type:=xlFillDefault
+    Range("I2:I32").Select
+    Range("J2").Select
+    Columns("I:I").ColumnWidth = 31.27
+    Range("J2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=VLOOKUP(RC[-3],'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!C[-9]:C[-4],4,0)"
+    Range("J6").Select
+    Columns("J:J").ColumnWidth = 21.45
+    Range("J2").Select
+    Selection.AutoFill Destination:=Range("J2:J32"), Type:=xlFillDefault
+    Range("J2:J32").Select
+    Range("K2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=VLOOKUP(RC[-3],'C:\Users\uav050\Documents\Encargos\Agotados\[TOs1708.xlsx]TOs'!C1:C5,3,0)"
+    Range("K3").Select
+    Columns("K:K").ColumnWidth = 21.45
+    Range("K2").Select
+    Selection.AutoFill Destination:=Range("K2:K36"), Type:=xlFillDefault
+    Range("K2:K36").Select
+    Range("L2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=INDEX('C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C3,MATCH(RC[-5],'C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C4,0))"
+    Range("L2").Select
+    Selection.AutoFill Destination:=Range("L2:L34"), Type:=xlFillDefault
+    Range("L2:L34").Select
+    Range("M2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=INDEX('C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C34,MATCH(RC[-6],'C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C4,0))"
+    Range("M2").Select
+    Selection.AutoFill Destination:=Range("M2:M35"), Type:=xlFillDefault
+    Range("M2:M35").Select
+    Range("M22").Select
+End Sub
+
+Sub grabarfecha()
+'
+' grabarfecha Macro
+'
+
+'
+    Range("L4:P5").Select
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Selection.Merge
+    ActiveCell.FormulaR1C1 = "=+TODAY()"
+    Range("L4:P5").Select
+    Selection.NumberFormat = "[$-x-sysdate]dddd, mmmm dd, yyyy"
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 16
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    Range("L4:P5").Select
+End Sub
+
+Sub Planchar()
+'
+' Planchar Macro
+'
+
+'
+    Cells.Select
+    Selection.Copy
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Range("A1").Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    Range("A1").Select
+End Sub
+
+Sub HojaChidaAgotados()
+'
+' HojaChidaAgotados Macro
+'
+
+'
+    Range("A6:H6").Select
+    Application.CutCopyMode = False
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Selection.Merge
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 18
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    ActiveCell.FormulaR1C1 = "PRODUCTOS DE LÍNEA"
+    Range("B7").Select
+    ActiveCell.FormulaR1C1 = "ORIGEN"
+    Range("C7").Select
+    ActiveCell.FormulaR1C1 = "CLAVE"
+    Range("C7").Select
+    ActiveCell.FormulaR1C1 = "CATEGORÍA"
+    Range("D7").Select
+    ActiveCell.FormulaR1C1 = "CLAVE"
+    Range("E7").Select
+    ActiveCell.FormulaR1C1 = "DESCRIPCIÓN"
+    Range("F7").Select
+    ActiveCell.FormulaR1C1 = "IMAGEN"
+    Range("G7").Select
+    ActiveCell.FormulaR1C1 = "CANAL"
+    Range("H7").Select
+    ActiveCell.FormulaR1C1 = "RAZÓN"
+    Range("I7").Select
+    ActiveCell.FormulaR1C1 = "JUEVES"
+    Range("J7").Select
+    ActiveCell.FormulaR1C1 = "VIERNES"
+    Range("K7").Select
+    ActiveCell.FormulaR1C1 = "LUNES"
+    Range("L7").Select
+    ActiveCell.FormulaR1C1 = "MARTES"
+    Range("M7").Select
+    ActiveCell.FormulaR1C1 = "MIÉRCOLES"
+    Range("N7").Select
+    ActiveCell.FormulaR1C1 = "JUEVES"
+    Range("O7").Select
+    ActiveCell.FormulaR1C1 = "VIERNES"
+    Range("P7").Select
+    ActiveCell.FormulaR1C1 = "LUNES"
+    Range("Q7").Select
+    ActiveCell.FormulaR1C1 = "MARTES"
+    Range("R7").Select
+    ActiveCell.FormulaR1C1 = "MIÉRCOLES"
+    Range("I6:M6").Select
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Selection.Merge
+    ActiveCell.FormulaR1C1 = "SEMANA 1"
+    Range("N6:R6").Select
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Selection.Merge
+    ActiveCell.FormulaR1C1 = "SEMANA 2"
+    Range("I6:R6").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 18
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ThemeColor = xlThemeColorLight1
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    Range("I7").Select
+    Windows("Formato agotados.xls").Activate
+    ActiveWindow.ScrollColumn = 9
+    ActiveWindow.ScrollColumn = 10
+    ActiveWindow.ScrollColumn = 11
+    ActiveWindow.ScrollColumn = 12
+    ActiveWindow.ScrollColumn = 13
+    ActiveWindow.ScrollColumn = 14
+    ActiveWindow.ScrollColumn = 15
+    ActiveWindow.ScrollColumn = 16
+    ActiveWindow.ScrollColumn = 17
+    Windows("REPORTES_AGOTADOS.xlsx").Activate
+    Range("S7").Select
+    ActiveCell.FormulaR1C1 = "S1"
+    Range("T7").Select
+    ActiveCell.FormulaR1C1 = "S2"
+    Range("U7").Select
+    ActiveCell.FormulaR1C1 = "ACUMULADOS"
+    Range("V7").Select
+    ActiveCell.FormulaR1C1 = "%"
+    Range("W7").Select
+End Sub
