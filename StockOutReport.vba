@@ -1,7 +1,7 @@
 Sub InicializarHojaAgotados()
     Dim RutaFuente As String
 
-    RutaFuente = "Y:\1. Poyectos\A. Catalogos\Tablas\Base de productos.xlsm"
+    RutaFuente = "[REDACTED]"
     
     Dim ListaAgotados As Variant
     ListaAgotados = Array()
@@ -97,7 +97,7 @@ Sub FormatoAgotados()
     
     'Dirección en el servidor de Amazon
     Dim ImgPath As String
-    ImgPath = "https://s3.us-east-1.amazonaws.com/mx.com.fuller.assets/cms/images/Producto/"
+    ImgPath = "[REDACTED]"
     
     Dim RutasImagenes As Variant
     RutasImagenes = Array(i)
@@ -262,10 +262,10 @@ Sub DarFormato()
     ActiveSheet.PasteSpecial Format:="Texto Unicode", Link:=False, _
         DisplayAsIcon:=False, NoHTMLFormatting:=True
     ActiveCell.FormulaR1C1 = _
-        "BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+        "BUSCARV(G2,'CATALOGO'!A:F,2,0)"
     Range("M2").Select
     ActiveCell.FormulaR1C1 = _
-        "=VLOOKUP(RC[-6],'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!C[-12]:C[-7],2,0)"
+        "=VLOOKUP(RC[-6],'CATALOGO'!C[-12]:C[-7],2,0)"
     Range("N2").Select
     ActiveSheet.Paste
     Range("O2").Select
@@ -274,7 +274,7 @@ Sub DarFormato()
     Windows("Fuente Agotados.xlsx").Activate
     Range("P2").Select
     ActiveCell.FormulaR1C1 = _
-        "=INDEX('C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C3,MATCH(RC[-9],'C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C4,0))"
+        "=INDEX('ANAINVXANT'!C3,MATCH(RC[-9],'ANAINVXANT'!C4,0))"
     Range("Q2").Select
     ActiveSheet.Paste
     Range("O2").Select
@@ -305,31 +305,31 @@ Sub DarFormatoBDAgotados()
     ActiveCell.FormulaR1C1 = "Origen"
     Range("I2").Select
     ActiveCell.FormulaR1C1 = _
-        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+        "=BUSCARV(G2,'CATALOGO'!A:F,2,0)"
     Range("I2").Select
     ActiveCell.FormulaR1C1 = _
-        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+        "=BUSCARV(G2,'CATALOGO'!A:F,2,0)"
     Range("I2").Select
     ActiveCell.FormulaR1C1 = _
-        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+        "=BUSCARV(G2,'CATALOGO'!A:F,2,0)"
     Range("I2").Select
     ActiveCell.FormulaR1C1 = _
-        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+        "=BUSCARV(G2,'CATALOGO'!A:F,2,0)"
     Range("I3").Select
     ActiveCell.FormulaR1C1 = _
-        "BUSCARV(G3,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+        "BUSCARV(G3,'CATALOGO'!A:F,2,0)"
     Range("I3").Select
     ActiveCell.FormulaR1C1 = _
-        "=BUSCARV(G3,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+        "=BUSCARV(G3,'CATALOGO'!A:F,2,0)"
     Range("I4").Select
     Columns("I:I").ColumnWidth = 53.91
     Range("I2").Select
     ActiveCell.FormulaR1C1 = _
-        "=BUSCARV(G2,'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!A:F,2,0)"
+        "=BUSCARV(G2,'CATALOGO'!A:F,2,0)"
     Range("I2").Select
     Selection.NumberFormat = "General"
     ActiveCell.FormulaR1C1 = _
-        "=VLOOKUP(RC[-2],'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!C[-8]:C[-3],2,0)"
+        "=VLOOKUP(RC[-2],'CATALOGO'!C[-8]:C[-3],2,0)"
     Range("I2").Select
     Selection.AutoFill Destination:=Range("I2:I32"), Type:=xlFillDefault
     Range("I2:I32").Select
@@ -337,7 +337,7 @@ Sub DarFormatoBDAgotados()
     Columns("I:I").ColumnWidth = 31.27
     Range("J2").Select
     ActiveCell.FormulaR1C1 = _
-        "=VLOOKUP(RC[-3],'Y:\1. Poyectos\A. Catalogos\Tablas\[Base de productos.xlsm]CATALOGO'!C[-9]:C[-4],4,0)"
+        "=VLOOKUP(RC[-3],'CATALOGO'!C[-9]:C[-4],4,0)"
     Range("J6").Select
     Columns("J:J").ColumnWidth = 21.45
     Range("J2").Select
@@ -345,7 +345,7 @@ Sub DarFormatoBDAgotados()
     Range("J2:J32").Select
     Range("K2").Select
     ActiveCell.FormulaR1C1 = _
-        "=VLOOKUP(RC[-3],'C:\Users\uav050\Documents\Encargos\Agotados\[TOs1708.xlsx]TOs'!C1:C5,3,0)"
+        "=VLOOKUP(RC[-3],'TOs'!C1:C5,3,0)"
     Range("K3").Select
     Columns("K:K").ColumnWidth = 21.45
     Range("K2").Select
@@ -353,13 +353,13 @@ Sub DarFormatoBDAgotados()
     Range("K2:K36").Select
     Range("L2").Select
     ActiveCell.FormulaR1C1 = _
-        "=INDEX('C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C3,MATCH(RC[-5],'C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C4,0))"
+        "=INDEX('ANAINVXANT'!C3,MATCH(RC[-5],'ANAINVXANT'!C4,0))"
     Range("L2").Select
     Selection.AutoFill Destination:=Range("L2:L34"), Type:=xlFillDefault
     Range("L2:L34").Select
     Range("M2").Select
     ActiveCell.FormulaR1C1 = _
-        "=INDEX('C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C34,MATCH(RC[-6],'C:\Users\uav050\Documents\Encargos\Agotados\[ANAINV.xlsb]ANAINVXANT'!C4,0))"
+        "=INDEX('ANAINVXANT'!C34,MATCH(RC[-6],'ANAINVXANT'!C4,0))"
     Range("M2").Select
     Selection.AutoFill Destination:=Range("M2:M35"), Type:=xlFillDefault
     Range("M2:M35").Select
@@ -1370,7 +1370,7 @@ Sub LlenarReporteFinal_Agotados()
         
         'Dirección en el servidor de Amazon
         Dim ImgPath As String
-        ImgPath = "https://s3.us-east-1.amazonaws.com/mx.com.fuller.assets/cms/images/Producto/"
+        ImgPath = "REDACTED"
     
         Dim RutasImagenes As Variant
         RutasImagenes = Array()
@@ -1406,7 +1406,7 @@ Sub LlenarReporteFinal_Agotados()
                 Cells(13 + UBound(ListaAgotados) + atraso, 4).Value = ListaAgotados(i)
                 Cells(13 + UBound(ListaAgotados) + atraso, 5).Value = ProductDescriptions(i)
                 Cells(13 + UBound(ListaAgotados) + atraso, 6).Select
-                ActiveCell.FormulaR1C1 = "=IMAGE(""https://s3.us-east-1.amazonaws.com/mx.com.fuller.assets/cms/images/Producto/" & productSKU(i) & ".png"")"
+                ActiveCell.FormulaR1C1 = "=IMAGE(""https://s3./" & productSKU(i) & ".png"")"
                 Cells(13 + UBound(ListaAgotados) + atraso, 7).Value = ProductChannel(i)
                 Rows(ActiveCell.Row).RowHeight = 50
                 atraso = atraso + 1
@@ -1416,7 +1416,7 @@ Sub LlenarReporteFinal_Agotados()
                 Cells(11 + retraso, 4).Value = ListaAgotados(i)
                 Cells(11 + retraso, 5).Value = ProductDescriptions(i)
                 Cells(11 + retraso, 6).Select
-                ActiveCell.FormulaR1C1 = "=IMAGE(""https://s3.us-east-1.amazonaws.com/mx.com.fuller.assets/cms/images/Producto/" & productSKU(i) & ".png"")"
+                ActiveCell.FormulaR1C1 = "=IMAGE(""https://s/" & productSKU(i) & ".png"")"
                 Cells(11 + retraso, 7).Value = ProductChannel(i)
                 Rows(ActiveCell.Row).RowHeight = 50
                 retraso = retraso + 1
